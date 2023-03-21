@@ -1,6 +1,6 @@
 body {
-    background: #fafafa;
-    color: #333333;
+    background: #f3f3f300;
+    color: #222121;
     margin-top: 5rem;
   }
   
@@ -13,7 +13,7 @@ ul {
   }
   
 .bg-steel {
-    background-color: #5f788a;
+    background-color: #353738;
   }
   
 .site-header .navbar-nav .nav-link {
@@ -29,11 +29,11 @@ ul {
   }
   
 .content-section {
-    background: #ffffff;
+    background: #fffefe;
     padding: 10px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    margin-bottom: 20px;
+    border: 1px solid #ffffff;
+    border-radius : 3px;
+    margin-bottom : 20px;
   }
   
 .article-title {
@@ -82,3 +82,4 @@ a.article-title:hover {
 .account-heading {
     font-size: 2.5rem;
   }
+

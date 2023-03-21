@@ -1,4 +1,5 @@
-from django.contrib.auth.forms import UsernameField
+from dataclasses import field
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import render,get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -9,8 +10,8 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from django.views.generic.base import TemplateView
 from .models import Post
+from .forms import PostCreateForm
 
 class PostListView(ListView):
     model = Post
@@ -18,7 +19,7 @@ class PostListView(ListView):
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 5
-    
+
     
 class UserPostListView(ListView):
     model = Post
@@ -37,19 +38,32 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
     
+def PostSearchView(request):
+    print(request.GET)
+    if request.method == 'GET':
+        if request.GET.get('search_btn') == 'search':
+            query = request.GET.get('search_bar')
+            if query is not '':
+                title_search = Post.objects.all().filter(title__icontains= query)
+                content = Post.objects.all().filter(content__icontains=query)
+                context = {'ontitle':title_search,'oncontent':content}
+                return render(request,'blog/post_search.html',context)
+    return render(request,'blog/post_search.html')
+    
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'blog/post_forms.html'
-    fields = ['title', 'content']
+    context_object_name = "post"
+    fields = ['title','content']
     
-
+    
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-    
 
+        
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin ,UpdateView):
     model = Post
     template_name = 'blog/post_forms.html'
@@ -72,9 +86,11 @@ class  PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     
     def test_func(self):
         post = self.get_object()
+        i = False
         if self.request.user == post.author:
-            return True
-        return False
+            i= True
+            return i
+        return i
 
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'})

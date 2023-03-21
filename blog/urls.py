@@ -21,6 +21,7 @@ urlpatterns = [
          name='blog_password_reset_done'),   
     # path('password_reset/confirm/<>uidb64/token/', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'), name= 'blog-password-reset-confirm'),
     path('', include('blogs.urls')),
+
 ]
 if settings.DEBUG :
     urlpatterns +=  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
