@@ -15,7 +15,12 @@
       </div>
       <h2 class="article-title">{{ post.title }}</h2>
       <p class="article-content">{{ post.content|safe }}</p>
-    </div>
+      <form action="" method=POST>
+        {% csrf_token %}
+      <button type="submit" class="glyphicon glyphicon-thumbs-up btn btn-outline-primary btn-sm mt-7 " name="like" value={{post.id}}> like</button>
+      <button type="submit" class="glyphicon glyphicon-thumbs-down btn btn-outline-primary btn-sm mt-7 " name="dislike" value={{post.id}}> dislike</button>
+      <span>{{likes}}</span>
+      </form>
+    </div>  
   </article>
 {% endblock content %}
-<!-- {{ post.content|safe}} -->

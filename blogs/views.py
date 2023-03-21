@@ -33,10 +33,29 @@ class UserPostListView(ListView):
         return Post.objects.filter(author=user).order_by('-date_posted') 
     
 
-
-class PostDetailView(DetailView):
-    model = Post
-    template_name = 'blog/post_detail.html'
+def PostDetailView(request,pk):
+    print(request.POST)
+    post = Post.objects.get(id = pk)
+    post_liked = None
+    if request.POST.get('like') and request.method == 'POST':
+            post_liked = Post.objects.get(id = request.POST.get('like'))
+            already_liked = PostLikes.objects.filter(user=request.user, post=post_liked).count()
+            if already_liked == 0:
+                like = PostLikes.objects.create(user=request.user,post = post_liked)
+    elif request.POST.get('dislike') and request.method == 'POST':
+            post_liked = Post.objects.get(id = request.POST.get('dislike'))
+            already_liked = PostLikes.objects.filter(user=request.user, post=post_liked).count()
+            if already_liked > 0:
+                try:
+                    dislike =  PostLikes.objects.get(user=request.user,post = post_liked).delete()
+                except Exception as e:
+                    print(e)
+    if post_liked is not None:
+            likes = PostLikes.objects.all().filter(post=post_liked).count()
+            print(likes)
+            context = {'likes':likes,'post':post}
+            return render(request,'blog/post_detail.html',context)
+    return render(request,'blog/post_detail.html',{'post':post})
     
 def PostSearchView(request):
     print(request.GET)
