@@ -10,15 +10,13 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Post
+from .models import Post,PostLikes
 from .forms import PostCreateForm
 
-class PostListView(ListView):
-    model = Post
-    template_name = 'blog/index.html'  # <app>/<model>_<viewtype>.html
-    context_object_name = 'posts'
-    ordering = ['-date_posted']
-    paginate_by = 5
+    
+def PostListView(request):
+    posts = Post.objects.all()
+    return render(request,'blog/index.html',{'posts':posts})
 
     
 class UserPostListView(ListView):
@@ -56,6 +54,8 @@ def PostDetailView(request,pk):
             context = {'likes':likes,'post':post}
             return render(request,'blog/post_detail.html',context)
     return render(request,'blog/post_detail.html',{'post':post})
+    
+    
     
 def PostSearchView(request):
     print(request.GET)

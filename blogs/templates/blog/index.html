@@ -10,8 +10,6 @@
                   </div>
                   <h2><a class="article-title" href="{% url 'blog-post-detail' post.id %}">{{ post.title }}</a></h2>
                   <p class="article-">{{ post.content|safe }}</p>
-                  <button type="button" class="glyphicon glyphicon-thumbs-up btn btn-outline-primary btn-sm mt-3 " name="like"></button>
-                <button type="button" class="glyphicon glyphicon-thumbs-down btn btn-outline-primary btn-sm mt-3" name="dislike"></button>
                 </div>
               </article>
     {% endfor %}
