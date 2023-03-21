@@ -25,6 +25,7 @@ This app carries followig functionalities :
 * List view for Blog
 * Viewing detail view of Blogs 
 * Posted blogs with delete and edit options
+* Searching of blogs
 
 ## User
 This app carries followig functionalities :
