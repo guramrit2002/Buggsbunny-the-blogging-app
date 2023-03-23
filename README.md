@@ -32,5 +32,3 @@ This app carries followig functionalities :
 * [authentication of users](https://docs.djangoproject.com/en/4.1/topics/auth/)
 * [authorization of users](https://docs.djangoproject.com/en/4.1/topics/auth/)
 * Profile of users
-
-This project is under development 
