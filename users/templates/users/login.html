@@ -5,18 +5,13 @@
     <div class="md-2" class = 'reg'>
         <form method="POST">
             {% csrf_token %}
-
                 {{ form|crispy }}
             </fieldset>
             <div class="form-">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                <button class="btn btn-outline-info" type="submit">Log in</button>
             </div>
         </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Already Have An Account? <a class="ml-2">Login</a>
-            </small>
-        </div>
+    
     </div>
 </div>
 <style>

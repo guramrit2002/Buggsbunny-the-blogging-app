@@ -1,4 +1,3 @@
-from . import views
 from .views import (
     PostListView,
     PostDetailView,
@@ -18,6 +17,5 @@ urlpatterns = [
     path('post/new/',  PostCreateView.as_view() ,name='blog-post-create'),
     path('post/<int:pk>/update',  PostUpdateView.as_view()  ,name='blog-post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='blog-post-delete'),
-    path('about/', views.about,name='blog-about'),
     path('home/',PostListView,name='blog-home_2'),
 ]
